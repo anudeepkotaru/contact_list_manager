@@ -1,6 +1,7 @@
 # backend/test_app.py
 import json
-from app import db, Contact
+from app import Contact
+from database import db
 
 def test_add_contact_success(client):
     response = client.post('/contacts', json={'name': 'John Doe', 'email': 'john@example.com'})

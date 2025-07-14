@@ -1,12 +1,20 @@
 import pytest
-from app import app, db, Contact
+from app import create_app, Contact
+from database import db
 
-@pytest.fixture(scope='session')
+class TestConfig:
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = 'test_secret_key'
+
+@pytest.fixture(scope='function')
 def client():
-    app.config['TESTING'] = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = ''
+    """Configures the app for testing, uses an in-memory SQLite database."""
+    app = create_app(config_class=TestConfig)
 
     with app.app_context():
         db.create_all()
         yield app.test_client()
+        db.session.remove()
         db.drop_all()
