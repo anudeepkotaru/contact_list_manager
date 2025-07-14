@@ -1,0 +1,27 @@
+# Python / Flask specific ignores
+.Python
+__pycache__/
+
+# Virtual environment
+venv/
+env/
+
+# Flask instance folder (contains SQLite DB and config)
+instance/
+
+
+# IDE-specific files (e.g., VS Code, PyCharm)
+.vscode/
+
+# Node / React specific ignores
+**/node_modules/
+build/
+.cache/
+.pnp
+.pnp.js
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
